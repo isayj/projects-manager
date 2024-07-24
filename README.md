@@ -1,0 +1,1 @@
+This project involves developing a Spring Boot application with a PostgreSQL database to manage customers and their projects, providing RESTful APIs for CRUD operations and data export, along with an HTML UI for interacting with these functionalities.
