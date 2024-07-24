@@ -1,0 +1,42 @@
+###GET find all projects
+GET http://localhost:8080/api/projects
+
+### Find project By ID
+GET http://localhost:8080/api/projects/2
+
+
+### Create new project
+POST http://localhost:8080/api/projects
+Content-Type: application/json
+
+{
+  "id": 4,
+  "name": "project 4",
+  "description": "created",
+  "createdAt": "2024-07-24"
+}
+
+### Update new Run with invalid name
+PUT http://localhost:8080/api/projects/4
+Content-Type: application/json
+
+{
+  "id": 4,
+  "name": "",
+  "description": "created",
+  "createdAt": "2024-07-24"
+}
+
+### Update an existing Run
+PUT http://localhost:8080/api/projects/4
+Content-Type: application/json
+
+{
+  "id": 4,
+  "name": "project 4",
+  "description": "updated",
+  "createdAt": "2024-07-24"
+}
+
+### Delete a Run
+DELETE http://localhost:8080/api/projects/4
