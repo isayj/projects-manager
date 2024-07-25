@@ -52,11 +52,11 @@ The application uses a PostgreSQL database to store project data.
 - **GET /api/projects/filter/{start}/{end}**: Filter projects created within a period.
 
 ### Example CRUD operations with [httpie](https://httpie.io/docs/cli/examples)
-#### PUT Retrieve All Projects
+#### GET Retrieve All Projects
 ```bash
 http :8080/api/projects
 ```
-#### PUT Retrieving One Project by ID
+#### GET Retrieving One Project by ID
 ```bash
 http :8080/api/projects/2
 ```
@@ -94,6 +94,11 @@ Content-Type: application/json
 ```http request
 ### Delete a project
 DELETE http://localhost:8080/api/projects/6
+```
+#### GET Retrieve projects created within a period
+```http request
+### Filter projects created within a date range
+GET http://localhost:8080/api/projects/filter/2024-03-24/2024-07-25
 ```
 
 
