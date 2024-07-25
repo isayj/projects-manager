@@ -1,43 +1,59 @@
 package yiqiu.projects_manager.project;
 
-import jakarta.annotation.PostConstruct;
+import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Repository
 public class ProjectRepository {
-    private final List<Project> projects = new ArrayList<>();
 
-    List<Project> findAll(){
-        return projects;
+    private final JdbcClient jdbcClient;
+
+    public ProjectRepository(JdbcClient jdbcClient) {
+        this.jdbcClient = jdbcClient;
     }
 
-    void create(Project project){
-        projects.add(project);
-    }
-
-    void update(Project project, Integer id){
-        Optional<Project> existingProject = findById(id);
-        existingProject.ifPresent(value -> projects.set(projects.indexOf(value), project));
-    }
-
-    void delete(Integer id){
-        projects.removeIf(project -> project.id().equals(id));
-    }
-
-    @PostConstruct
-    private void init(){
-        projects.add(new Project(1, "Project 1", "Description 1", LocalDate.now()));
-        projects.add(new Project(2, "Project 2", "Description 2", LocalDate.now()));
-        projects.add(new Project(3, "Project 3", "Description 3", LocalDate.now()));
+    public List<Project> findAll() {
+        return jdbcClient.sql("SELECT * FROM Project")
+                .query(Project.class)
+                .list();
     }
 
     public Optional<Project> findById(Integer id) {
-        return projects.stream().filter(project -> Objects.equals(project.id(), id)).findFirst();
+        return jdbcClient.sql("SELECT id, name, description, created_on FROM Project WHERE id = ?")
+                .param(id)
+                .query(Project.class).optional();
+    }
+
+    public void create(Project project) {
+        var created = jdbcClient.sql("INSERT INTO Project(id, name, description, created_on) VALUES (?,?,?,?)")
+                .params(List.of(project.id(), project.name(), project.description(), project.createdOn()))
+                .update();
+        Assert.state(created == 1, "Failed to create project" + project.name());
+    }
+
+    public void update(Project project, Integer id) {
+        var updated = jdbcClient.sql("UPDATE Project SET name = ?, description = ?, created_on = ? WHERE id = ?")
+                .params(List.of(project.name(), project.description(), project.createdOn(), id))
+                .update();
+        Assert.state(updated == 1, "Failed to update project" + project.name());
+    }
+
+    public void delete(Integer id) {
+        var deleted = jdbcClient.sql("DELETE FROM Project WHERE id = ?")
+                .param(id)
+                .update();
+        Assert.state(deleted == 1, "Failed to delete project with id" + id);
+    }
+
+    public int count() {
+        return jdbcClient.sql("SELECT * FROM Project").query().listOfRows().size();
+    }
+
+    public void saveAll(List<Project> projects) {
+        projects.forEach(this::create);
     }
 }

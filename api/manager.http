@@ -10,33 +10,33 @@ POST http://localhost:8080/api/projects
 Content-Type: application/json
 
 {
-  "id": 4,
-  "name": "project 4",
-  "description": "created",
+  "id": 6,
+  "name": "project 6",
+  "description": "created http",
   "createdAt": "2024-07-24"
 }
 
 ### Update new Run with invalid name
-PUT http://localhost:8080/api/projects/4
+PUT http://localhost:8080/api/projects/6
 Content-Type: application/json
 
 {
-  "id": 4,
+  "id": 6,
   "name": "",
-  "description": "created",
-  "createdAt": "2024-07-24"
-}
-
-### Update an existing Run
-PUT http://localhost:8080/api/projects/4
-Content-Type: application/json
-
-{
-  "id": 4,
-  "name": "project 4",
   "description": "updated",
   "createdAt": "2024-07-24"
 }
 
+### Update an existing Run
+PUT http://localhost:8080/api/projects/6
+Content-Type: application/json
+
+{
+  "id": 6,
+  "name": "project 6",
+  "description": "updated http",
+  "createdAt": "2024-07-24"
+}
+
 ### Delete a Run
-DELETE http://localhost:8080/api/projects/4
+DELETE http://localhost:8080/api/projects/6
