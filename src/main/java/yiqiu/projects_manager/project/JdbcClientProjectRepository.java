@@ -56,4 +56,12 @@ public class JdbcClientProjectRepository {
     public void saveAll(List<Project> projects) {
         projects.forEach(this::create);
     }
+
+    public List<Project> filterProjectsByDate(String startDate, String endDate) {
+        return jdbcClient.sql("SELECT * FROM Project WHERE created_on >= CAST(? AS DATE) AND created_on <= CAST(? AS DATE)")
+                .param(startDate)
+                .param(endDate)
+                .query(Project.class)
+                .list();
+    }
 }
