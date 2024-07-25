@@ -12,10 +12,10 @@ import java.io.InputStream;
 @Component
 public class ProjectJsonDataLoader implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(ProjectJsonDataLoader.class);
-    private final ProjectRepository projectRepository;
+    private final JdbcClientProjectRepository projectRepository;
     private final ObjectMapper objectMapper;
 
-    public ProjectJsonDataLoader(ProjectRepository projectRepository, ObjectMapper objectMapper) {
+    public ProjectJsonDataLoader(JdbcClientProjectRepository projectRepository, ObjectMapper objectMapper) {
         this.projectRepository = projectRepository;
         this.objectMapper = objectMapper;
     }
@@ -26,7 +26,7 @@ public class ProjectJsonDataLoader implements CommandLineRunner {
             try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("data/projects.json")) {
                 Projects allProjects = objectMapper.readValue(resourceAsStream, Projects.class);
                 projectRepository.saveAll(allProjects.projects());
-                log.info("Loaded {} projects", allProjects.projects().size());
+                log.info("Loaded {} projects from JSON", allProjects.projects().size());
             } catch (IOException e) {
                 throw new RuntimeException("Failed to read JSON data", e);
             }

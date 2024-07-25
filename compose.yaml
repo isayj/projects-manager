@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=project-manager'
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_USER=isa'
+    ports:
+      - '5432:5432'

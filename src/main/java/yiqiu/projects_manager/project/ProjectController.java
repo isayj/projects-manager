@@ -34,18 +34,18 @@ public class ProjectController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     void create(@Valid @RequestBody Project project){
-        projectRepository.create(project);
+        projectRepository.save(project);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("{id}")
     void update(@Valid @RequestBody Project project, @PathVariable Integer id){
-        projectRepository.update(project, id);
+        projectRepository.save(project);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
     void delete(@PathVariable Integer id) {
-        projectRepository.delete(id);
+        projectRepository.delete(projectRepository.findById(id).get());
     }
 }
