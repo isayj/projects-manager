@@ -44,11 +44,12 @@ The application uses a PostgreSQL database to store project data.
 - Open your browser and go to `http://localhost:8080/api/projects`.
 
 ### API Endpoints
-- **GET /projects**: Retrieve all projects.
-- **GET /projects/{id}**: Retrieve a project by ID.
-- **POST /projects**: Create a new project.
-- **PUT /projects/{id}**: Update an existing project.
-- **DELETE /projects/{id}**: Delete a project by ID.
+- **GET /api/projects**: Retrieve all projects.
+- **GET /api/projects/{id}**: Retrieve a project by ID.
+- **POST /api/projects**: Create a new project.
+- **PUT /api/projects/{id}**: Update an existing project.
+- **DELETE /api/projects/{id}**: Delete a project by ID.
+- **GET /api/projects/filter/{start}/{end}**: Filter projects created within a period.
 
 ### Example CRUD operations with [httpie](https://httpie.io/docs/cli/examples)
 #### PUT Retrieve All Projects

@@ -44,5 +44,5 @@ Content-Type: application/json
 ### Delete a project
 DELETE http://localhost:8080/api/projects/6
 
-### Filter projects within a date range
+### Filter projects created within a date range
 GET http://localhost:8080/api/projects/filter/2024-03-24/2024-07-25
