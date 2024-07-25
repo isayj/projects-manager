@@ -13,21 +13,11 @@ Content-Type: application/json
   "id": 6,
   "name": "project 6",
   "description": "created http",
-  "createdAt": "2024-07-24"
+  "createdOn": "2024-07-24",
+  "version": null
 }
 
-### Update new Run with invalid name
-PUT http://localhost:8080/api/projects/6
-Content-Type: application/json
-
-{
-  "id": 6,
-  "name": "",
-  "description": "updated",
-  "createdAt": "2024-07-24"
-}
-
-### Update an existing Run
+### Update an existing project
 PUT http://localhost:8080/api/projects/6
 Content-Type: application/json
 
@@ -35,8 +25,21 @@ Content-Type: application/json
   "id": 6,
   "name": "project 6",
   "description": "updated http",
-  "createdAt": "2024-07-24"
+  "createdOn": "2024-07-24",
+  "version": null
 }
 
-### Delete a Run
+### Update the project with invalid name
+PUT http://localhost:8080/api/projects/6
+Content-Type: application/json
+
+{
+  "id": 6,
+  "name": "",
+  "description": "updated",
+  "createdOn": "2024-07-24",
+  "version": null
+}
+
+### Delete a project
 DELETE http://localhost:8080/api/projects/6
