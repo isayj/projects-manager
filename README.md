@@ -13,6 +13,8 @@ The application uses a PostgreSQL database to store project data.
 - PostgreSQL
 - Maven
 
+### Overview of Architecture
+![projects-manager.png](projects-manager.png)
 
 ### Prerequisites
 - Java 17 or higher
